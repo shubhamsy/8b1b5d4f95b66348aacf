@@ -1,0 +1,23 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Homes</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @questions  = Question.all %>
+    <% @questions.each_with_index do |question,i| %>
+      <tr>
+        <td><a href="/questions/<%= question.id %>"><%= i + 1 %>. <%= question.name %></a></td>        
+      </tr>
+      <% i = i + 1 %>
+    <% end %>
+  </tbody>
+</table>
+
+<br>

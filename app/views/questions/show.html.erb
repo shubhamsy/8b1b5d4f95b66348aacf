@@ -1,0 +1,42 @@
+<p id="notice"><%= notice %></p>
+
+
+<% if user_signed_in? %>
+
+<%= button_to "Follow User #{@question.user.firstname}", {:controller => "follows", :action => "follow_user", :followable_id => @question.user.id, :followable_type => 'User', :user_id => current_user.id, :question_id => @question.id} , {:method=>:post}  %>
+<br>
+
+<%= button_to "Follow Topic #{@question.topic.name}", {:controller => "follows", :action => "follow_topic", :followable_id => @question.topic.id, :followable_type => 'Topic', :user_id => current_user.id, :question_id => @question.id} , {:method=>:post}  %>
+
+<% end %>
+
+<br>
+
+<p>
+  <strong>Question Name:</strong>
+  <%= @question.name %>
+</p>
+
+<h2>Answers</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @question.answers.each_with_index do |answer,i| %>
+      <tr>
+        <td><%= i + 1 %>. <%= answer.name %></a></td>        
+      </tr>
+      <% i = i + 1 %>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'Edit', edit_question_path(@question) %> |
+<%= link_to 'Back', questions_path %>
